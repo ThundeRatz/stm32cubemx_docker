@@ -27,7 +27,7 @@ jobs:
           if [[ "$branch_name" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             version=${branch_name#v}
             echo "version=$version" >> $GITHUB_OUTPUT
-            echo "tags=ghcr.io/thunderatz/stm32cubemx:${version}" >> $GITHUB_OUTPUT
+            echo "tags=ghcr.io/thunderatz/stm32cubemx:${version}-dev" >> $GITHUB_OUTPUT
           else
             echo "Error: Branch name must follow 'vx.y.z' pattern." >&2
             exit 1
