@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          build-args: G4
+          build-args: MCU=G4
           push: true
           tags: ${{ steps.versioning.outputs.ghcr_tag }}-g4
           cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-g4
@@ -72,7 +72,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          build-args: F4
+          build-args: MCU=F4
           push: true
           tags: ${{ steps.versioning.outputs.ghcr_tag }}-f4
           cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f4
@@ -82,7 +82,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          build-args: F1
+          build-args: MCU=F1
           push: true
           tags: ${{ steps.versioning.outputs.ghcr_tag }}-f1
           cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f1
