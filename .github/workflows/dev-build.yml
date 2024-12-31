@@ -2,6 +2,14 @@ name: Development Build
 
 on:
   pull_request:
+    paths-ignore:
+      - ".vscode/**"
+      - ".devcontainer/**"
+      - "assets/**"
+      - "docs/**"
+      - ".editorconfig"
+      - "**.md"
+
     branches:
       - main
     types:
