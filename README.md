@@ -30,13 +30,13 @@ To use the `thunderatz/stm32cubemx` image in another container, you can pull it 
 If you're using **Docker Hub**, use the following command:
 
 ```bash
-docker pull thunderatz/stm32cubemx
+docker pull thunderatz/stm32cubemx:6.13.0
 ```
 
 If you're using **GHCR**, the command will be:
 
 ```bash
-docker pull ghcr.io/thunderatz/stm32cubemx
+docker pull ghcr.io/thunderatz/stm32cubemx:6.13.0
 ```
 
 ### 2. Running the Image
@@ -46,7 +46,7 @@ After pulling the image, you can run it in a container with the following comman
 ```bash
 docker run --rm -it \
   -v /path/to/your/project:/workspace \
-  thunderatz/stm32cubemx
+  thunderatz/stm32cubemx:6.13.0
 ```
 
 Or, if you're using **GHCR**:
@@ -54,7 +54,7 @@ Or, if you're using **GHCR**:
 ```bash
 docker run --rm -it \
   -v /path/to/your/project:/workspace \
-  ghcr.io/thunderatz/stm32cubemx
+  ghcr.io/thunderatz/stm32cubemx:6.13.0
 ```
 
 ## 🔨 Building
