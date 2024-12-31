@@ -15,18 +15,11 @@ STM32CubeMX Setup and Docker Environment for STM32 Projects
 ## 📑 Summary
 
 - [📑 Summary](#-summary)
-- [📦️ Packages](#-packages)
 - [🔨 Building](#-building)
 - [🚀 Running](#-running)
 - [💻 Docker Setup](#-docker-setup)
 - [👥 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
-
-
-## 📦️ Packages
-
-- **stm32cube** - STM32CubeMX Docker container, automating setup and configuration of STM32 development environment.
- 
 
 ## 🚀 Running
 
@@ -104,6 +97,7 @@ We welcome contributions! To contribute to the `ThundeRatz/stm32cubemx` project,
 1. **Fork the repository** – Start by forking this repository to your own GitHub account.
 
 2. **Create a new branch** – When creating a new branch for your changes, please name the branch according to the version of STM32CubeMX you are working with. For example:
+
    - `v6.13.1` for version 6.13.1 of STM32CubeMX
    - `v6.14.0` for version 6.14.0 of STM32CubeMX
 
@@ -114,7 +108,6 @@ We welcome contributions! To contribute to the `ThundeRatz/stm32cubemx` project,
 5. **Submit a pull request** – Once your changes are ready, submit a pull request (PR) with a detailed description of the modifications.
 
 We appreciate all contributions, whether it's reporting issues, suggesting features, or submitting fixes!
-
 
 ## ✨ Contributors
 
