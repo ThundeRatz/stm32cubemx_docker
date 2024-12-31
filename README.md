@@ -66,7 +66,7 @@ This project uses Docker to containerize the STM32CubeMX environment, making set
 Make sure Docker is installed on your machine. To build the Docker image, run the following command in the project's root directory:
 
 ```bash
-docker build -t stm32cubemx:latest -f docker/Dockerfile .
+docker build -t stm32cubemx -f .
 ```
 
 This will download and install all necessary dependencies, including STM32CubeMX and Java Runtime.
@@ -76,7 +76,7 @@ This will download and install all necessary dependencies, including STM32CubeMX
 Once the image is built, you can run STM32CubeMX inside the Docker container. To do this, execute the following command:
 
 ```bash
-docker run -it --rm stm32cubemx:latest
+docker run -it --rm stm32cubemx
 ```
 
 This will launch the STM32CubeMX environment inside the Docker container, allowing you to work on your STM32 project.
