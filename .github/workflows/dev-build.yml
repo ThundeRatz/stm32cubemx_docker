@@ -23,7 +23,7 @@ jobs:
       - name: Extract Version for Dev Build
         id: versioning
         run: |
-          branch_name=${{ github.ref_name }}
+          branch_name=${{ github.head_ref }}
           if [[ "$branch_name" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             version=${branch_name#v}
             echo "version=$version" >> $GITHUB_OUTPUT
