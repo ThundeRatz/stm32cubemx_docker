@@ -2,7 +2,7 @@ name: Development Build
 
 on:
   pull_request:
-    branches-ignore:
+    branches:
       - main
     types:
       - opened
