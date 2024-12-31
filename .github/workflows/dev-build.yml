@@ -1,0 +1,81 @@
+name: Development Build
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  dev-build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Extract Version for Dev Build
+        id: versioning
+        run: |
+          branch_name=${{ github.head_ref }}
+          if [[ "$branch_name" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            version=${branch_name#v}
+            echo "version=$version" >> $GITHUB_OUTPUT
+            echo "ghcr_tag=ghcr.io/thunderatz/stm32cubemx:${version}-dev" >> $GITHUB_OUTPUT
+          else
+            echo "Error: Branch name must follow 'vx.y.z' pattern." >&2
+            exit 1
+          fi
+        shell: bash
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Dev Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}
+          cache-to: type=inline
+      
+      - name: Build and Push Dev Docker Image for G4 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: MCU=G4
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-g4
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-g4
+          cache-to: type=inline
+    
+      - name: Build and Push Dev Docker Image for F4 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: MCU=F4
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-f4
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f4
+          cache-to: type=inline
+    
+      - name: Build and Push Dev Docker Image for F1 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: MCU=F1
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-f1
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f1
+          cache-to: type=inline
