@@ -36,7 +36,8 @@ jobs:
           if [[ "$branch_name" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             version=${branch_name#v}
             echo "version=$version" >> $GITHUB_OUTPUT
-            echo "tags=ghcr.io/thunderatz/stm32cubemx:${version},thunderatz/stm32cubemx:${version}" >> $GITHUB_OUTPUT
+            echo "ghcr_tag=ghcr.io/thunderatz/stm32cubemx:${version}" >> $GITHUB_OUTPUT
+            echo "docker_tag=thunderatz/stm32cubemx:${version}" >> $GITHUB_OUTPUT
           else
             echo "Error: Branch name must follow 'vx.y.z' pattern." >&2
             exit 1
@@ -61,6 +62,36 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.versioning.outputs.tags }}
+          tags: ${{ steps.versioning.outputs.ghcr_tag }},${{ steps.versioning.outputs.docker_tag }}
           cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}
+          cache-to: type=inline
+      
+      - name: Build and Push Production Docker Image for G4 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: G4
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-g4,${{ steps.versioning.outputs.docker_tag }}-g4
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-g4
+          cache-to: type=inline
+    
+      - name: Build and Push Production Docker Image for F4 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: F4
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-f4,${{ steps.versioning.outputs.docker_tag }}-f4
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f4
+          cache-to: type=inline
+    
+      - name: Build and Push Production Docker Image for F1 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: F1
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-f1,${{ steps.versioning.outputs.docker_tag }}-f1
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-f1
           cache-to: type=inline

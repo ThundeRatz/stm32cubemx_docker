@@ -27,6 +27,13 @@ RUN echo "exit" > /root/cube-init && \
     rm /root/cube-init && \
     pkill -f Xvfb
 
+
 RUN rm /tmp/.X10-lock
 
-WORKDIR /root
+ARG MCU
+
+RUN if [[ -z "$MCU" ]] ; then echo Docker built without MCU repository ; \
+    else apt-get install -y git && \
+    mkdir -p /root/STM32Cube/Repository && cd /root/STM32Cube/Repository && \
+    git clone https://github.com/STMicroelectronics/STM32Cube${MCU}.git && cd STM32Cube${MCU} && \
+    git submodule update --init --recursive ; fi
