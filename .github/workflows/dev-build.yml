@@ -23,10 +23,11 @@ jobs:
       - name: Extract Version for Dev Build
         id: versioning
         run: |
-          branch_name=${{ github.head_ref }}
+          branch_name=${{ github.ref_name }}
           if [[ "$branch_name" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             version=${branch_name#v}
-            echo "tags=ghcr.io/thunderatz/stm32cubemx:${version}-dev" >> $GITHUB_ENV
+            echo "version=$version" >> $GITHUB_OUTPUT
+            echo "tags=ghcr.io/thunderatz/stm32cubemx:${version}" >> $GITHUB_OUTPUT
           else
             echo "Error: Branch name must follow 'vx.y.z' pattern." >&2
             exit 1
@@ -45,6 +46,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.tags }}
-          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ env.version }}-dev
+          tags: ${{ steps.versioning.outputs.tags }}
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}
           cache-to: type=inline
