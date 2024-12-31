@@ -27,4 +27,6 @@ RUN echo "exit" > /root/cube-init && \
     rm /root/cube-init && \
     pkill -f Xvfb
 
+RUN rm /tmp/.X10-lock
+
 WORKDIR /root
