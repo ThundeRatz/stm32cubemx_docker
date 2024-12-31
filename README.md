@@ -23,7 +23,7 @@ STM32CubeMX Setup and Docker Environment for STM32 Projects
 
 ## 🚀 Running
 
-To use the `ThundeRatz/stm32cubemx` image in another container, you can pull it directly from the GitHub Container Registry (GHCR) or Docker Hub.
+To use the `thunderatz/stm32cubemx` image in another container, you can pull it directly from the GitHub Container Registry (GHCR) or Docker Hub.
 
 ### 1. Pulling the Image
 
@@ -46,7 +46,7 @@ After pulling the image, you can run it in a container with the following comman
 ```bash
 docker run --rm -it \
   -v /path/to/your/project:/workspace \
-  thundeRatz/stm32cubemx
+  thunderatz/stm32cubemx
 ```
 
 Or, if you're using **GHCR**:
