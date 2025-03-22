@@ -11,8 +11,8 @@ RUN apt-get update -y && \
     && apt-get clean
 
 RUN mkdir st && cd st && \
-    wget -nv https://sw-center.st.com/packs/resource/library/stm32cube_mx_v6130-lin.zip && \
-    unzip -q stm32cube_mx_v6130-lin.zip && \
+    wget -nv https://sw-center.st.com/packs/resource/library/stm32cube_mx_v6140-lin.zip && \
+    unzip -q stm32cube_mx_v6140-lin.zip && \
     unzip -q JavaJre.zip && \
     mv MX /root/STM32CubeMX && \
     mv jre /root/STM32CubeMX && \
