@@ -37,7 +37,5 @@ RUN if [ -z "$MCU" ]; then \
     else \
         apt-get install -y git && \
         mkdir -p /root/STM32Cube/Repository && cd /root/STM32Cube/Repository && \
-        git clone https://github.com/STMicroelectronics/STM32Cube${MCU}.git && \
-        cd STM32Cube${MCU} && \
-        git submodule update --init --recursive; \
+        git clone --recursive https://github.com/STMicroelectronics/STM32Cube${MCU}.git \
     fi
