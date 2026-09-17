@@ -1,4 +1,4 @@
-<!-- markdownlint-disale -->
+<!-- markdownlint-disable -->
 <div align="center">
 
 STM32CubeMX Setup and Docker Environment for STM32 Projects
@@ -68,10 +68,14 @@ This project uses Docker to containerize the STM32CubeMX environment, making set
 Make sure Docker is installed on your machine. To build the Docker image, run the following command in the project's root directory:
 
 ```bash
-docker build -t stm32cubemx -f .
+docker build -t stm32cubemx .
 ```
 
-This will download and install all necessary dependencies, including STM32CubeMX and Java Runtime.
+This will download and install all necessary dependencies, including STM32CubeMX and its Java Runtime. To also install an MCU firmware repository, pass the MCU family as a build argument:
+
+```bash
+docker build --build-arg MCU=H7 -t stm32cubemx:h7 .
+```
 
 ### 2. Run STM32CubeMX in Docker
 
@@ -88,9 +92,10 @@ This will launch the STM32CubeMX environment inside the Docker container, allowi
 The Dockerfile provided in this repository creates a containerized environment for STM32CubeMX. It includes all the necessary dependencies to run STM32CubeMX on an Ubuntu system. Here's a summary of how the Dockerfile works:
 
 - **Base Image**: The Dockerfile starts from the official Ubuntu 24.04 image.
-- **Dependencies**: It installs essential packages such as `unzip`, `xvfb`, `wget`, `openjdk-21-jre`, and others required to run STM32CubeMX.
-- **STM32CubeMX**: It downloads and sets up STM32CubeMX, along with the Java Runtime.
-- **X11 Virtual Frame Buffer (Xvfb)**: A virtual X server is used to run the GUI-based STM32CubeMX in headless mode.
+- **Dependencies**: It installs the system libraries used by the Java Runtime bundled with STM32CubeMX, along with `xvfb`, `wget` and `unzip`.
+- **STM32CubeMX**: It downloads and sets up STM32CubeMX, along with its Java Runtime, and runs it once to finish its first launch setup.
+- **X11 Virtual Frame Buffer (Xvfb)**: A virtual X server is used to run the GUI-based STM32CubeMX in headless mode, e.g. with `xvfb-run $CUBE_PATH/STM32CubeMX -q script.txt`.
+- **MCU Repository**: When the `MCU` build argument is set, it installs the matching STM32Cube firmware repository, without its git history and example projects.
 
 ## 👥 Contributing
 
@@ -108,7 +113,7 @@ We welcome contributions! To contribute to the `ThundeRatz/stm32cubemx` project,
 
 4. **Test your changes** – Ensure everything works as expected within the container. Build and verify the setup for STM32CubeMX.
 
-5. **Submit a pull request** – Once your changes are ready, submit a pull request (PR) with a detailed description of the modifications.
+5. **Submit a pull request** – Once your changes are ready, submit a pull request (PR) with a detailed description of the modifications. Pull requests publish development images tagged `<version>-dev`, and merging publishes the release images to GHCR and Docker Hub.
 
 We appreciate all contributions, whether it's reporting issues, suggesting features, or submitting fixes!
 
