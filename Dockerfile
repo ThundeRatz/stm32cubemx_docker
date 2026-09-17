@@ -11,8 +11,8 @@ RUN apt-get update -y && \
     && apt-get clean
 
 RUN mkdir st && cd st && \
-    wget -nv https://sw-center.st.com/packs/resource/library/stm32cube_mx_v6140-lin.zip && \
-    unzip -q stm32cube_mx_v6140-lin.zip && \
+    wget -nv https://sw-center.st.com/packs/resource/library/stm32cube_mx_v6181-lin.zip && \
+    unzip -q stm32cube_mx_v6181-lin.zip && \
     unzip -q JavaJre.zip && \
     mv MX /root/STM32CubeMX && \
     mv jre /root/STM32CubeMX && \
@@ -37,5 +37,5 @@ RUN if [ -z "$MCU" ]; then \
     else \
         apt-get install -y git && \
         mkdir -p /root/STM32Cube/Repository && cd /root/STM32Cube/Repository && \
-        git clone --recursive https://github.com/STMicroelectronics/STM32Cube${MCU}.git \
+        git clone --recursive https://github.com/STMicroelectronics/STM32Cube${MCU}.git; \
     fi

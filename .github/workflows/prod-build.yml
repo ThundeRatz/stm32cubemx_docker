@@ -67,6 +67,16 @@ jobs:
           tags: ${{ steps.versioning.outputs.ghcr_tag }}-g4,${{ steps.versioning.outputs.docker_tag }}-g4
           cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-g4
           cache-to: type=inline
+
+      - name: Build and Push Production Docker Image for H7 MCU
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: MCU=H7
+          push: true
+          tags: ${{ steps.versioning.outputs.ghcr_tag }}-h7,${{ steps.versioning.outputs.docker_tag }}-h7
+          cache-from: type=registry,ref=ghcr.io/thunderatz/stm32cubemx:${{ steps.versioning.outputs.version }}-h7
+          cache-to: type=inline
     
       - name: Build and Push Production Docker Image for F4 MCU
         uses: docker/build-push-action@v3
