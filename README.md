@@ -30,13 +30,13 @@ To use the `thunderatz/stm32cubemx` image in another container, you can pull it 
 If you're using **Docker Hub**, use the following command:
 
 ```bash
-docker pull thunderatz/stm32cubemx:6.14.0
+docker pull thunderatz/stm32cubemx:6.18.1
 ```
 
 If you're using **GHCR**, the command will be:
 
 ```bash
-docker pull ghcr.io/thunderatz/stm32cubemx:6.14.0
+docker pull ghcr.io/thunderatz/stm32cubemx:6.18.1
 ```
 
 ### 2. Running the Image
@@ -46,7 +46,7 @@ After pulling the image, you can run it in a container with the following comman
 ```bash
 docker run --rm -it \
   -v /path/to/your/project:/workspace \
-  thunderatz/stm32cubemx:6.14.0
+  thunderatz/stm32cubemx:6.18.1
 ```
 
 Or, if you're using **GHCR**:
@@ -54,8 +54,10 @@ Or, if you're using **GHCR**:
 ```bash
 docker run --rm -it \
   -v /path/to/your/project:/workspace \
-  ghcr.io/thunderatz/stm32cubemx:6.14.0
+  ghcr.io/thunderatz/stm32cubemx:6.18.1
 ```
+
+Images with an MCU firmware repository already installed are also available, by appending the MCU family to the tag: `-g4`, `-h7`, `-f4` and `-f1` (e.g. `thunderatz/stm32cubemx:6.18.1-h7`).
 
 ## 🔨 Building
 
@@ -100,6 +102,7 @@ We welcome contributions! To contribute to the `ThundeRatz/stm32cubemx` project,
 
    - `v6.13.1` for version 6.13.1 of STM32CubeMX
    - `v6.14.0` for version 6.14.0 of STM32CubeMX
+   - `v6.18.1` for version 6.18.1 of STM32CubeMX
 
 3. **Make your changes** – Implement the desired changes or fixes in your branch.
 
