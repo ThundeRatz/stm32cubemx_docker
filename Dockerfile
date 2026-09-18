@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:24.04 AS stm32cubemx
+FROM ubuntu:26.04 AS stm32cubemx
 
 LABEL org.opencontainers.image.source="https://github.com/ThundeRatz/stm32cubemx_docker"
 LABEL org.opencontainers.image.description="STM32CubeMX environment for headless STM32 code generation"

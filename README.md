@@ -91,7 +91,7 @@ This will launch the STM32CubeMX environment inside the Docker container, allowi
 
 The Dockerfile provided in this repository creates a containerized environment for STM32CubeMX. It includes all the necessary dependencies to run STM32CubeMX on an Ubuntu system. Here's a summary of how the Dockerfile works:
 
-- **Base Image**: The Dockerfile starts from the official Ubuntu 24.04 image.
+- **Base Image**: The Dockerfile starts from the official Ubuntu 26.04 image.
 - **Dependencies**: It installs the system libraries used by the Java Runtime bundled with STM32CubeMX, along with `xvfb`, `wget` and `unzip`.
 - **STM32CubeMX**: It downloads and sets up STM32CubeMX, along with its Java Runtime, and runs it once to finish its first launch setup.
 - **X11 Virtual Frame Buffer (Xvfb)**: A virtual X server is used to run the GUI-based STM32CubeMX in headless mode, e.g. with `xvfb-run $CUBE_PATH/STM32CubeMX -q script.txt`.
